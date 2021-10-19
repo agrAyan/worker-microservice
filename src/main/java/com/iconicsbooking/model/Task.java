@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,10 +46,12 @@ public class Task {
 
 	@OneToMany
 	@JoinColumn(name = "task_id")
+	@JsonIgnore
 	Set<Workers> workersList;
 
 	@ManyToOne
 	@JoinColumn(name = "event_id")
+	@JsonIgnore
 	 Events events;
 	
 }

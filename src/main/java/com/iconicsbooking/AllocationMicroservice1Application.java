@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 import com.iconicsbooking.model.Availability;
 import com.iconicsbooking.model.Workers;
+import com.iconicsbooking.model.WorkersPartialUpdate;
 import com.iconicsbooking.service.IWorkerService;
 
 @SpringBootApplication
+@EnableEurekaClient
 public class AllocationMicroservice1Application implements CommandLineRunner{
 
 	public static void main(String[] args) {
@@ -34,12 +37,14 @@ public class AllocationMicroservice1Application implements CommandLineRunner{
 //		workerService.addWorker(worker2);
 //		workerService.addWorker(worker3);
 	
+	
+	
 	 // workerService.getAllWorkers().forEach(System.out:: println);
 		
 		//List<Workers> jobtype= workerService.getByJobType("CHEF");
-		List<Workers> ava= workerService.getByWorkerStatus(available);
+		//List<Workers> ava= workerService.getByWorkerStatus(available);
 		//System.out.println(jobtype);
-		System.out.println(ava);
+		//System.out.println(ava);
 		
 //		workerService.addWorker(worker1);
 //		workerService.addWorker(worker2);
@@ -60,12 +65,17 @@ public class AllocationMicroservice1Application implements CommandLineRunner{
 		//Events openCeremony= new Events("Open Ceremony","Vivek",startDate, endDate,"Available",25000);
 		//openCeremonyService.addOpenCeremony(openCeremony);
 		
-		String message= workerService.assignTaskToResource(100, 1);
+		//String message= workerService.assignTaskToResource(100, 1);
 //		System.out.println(message);
 		
 //		String message= workerService.changeStatus(101);
 //		System.out.println(message);
 //		
+//	String status= workerService.assignTaskToResource(1, 1);
+//	System.out.println(status);	
+		
+//		String status= workerService.freeResource(1);
+//	System.out.println(status);
 	}
 
 }

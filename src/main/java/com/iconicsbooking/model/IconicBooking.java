@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +35,7 @@ public class IconicBooking {
 	private double rating;
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "company_id")
+	@JsonIgnore
 	Set<Events> event;
 	public IconicBooking(String companyName, String ownerName, double rating) {
 		super();

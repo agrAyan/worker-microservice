@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.transaction.Transactional;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,6 +51,7 @@ public class Workers {
 	private String jobType;
 	@ManyToOne
 	@JoinColumn(name="task_id")
+	//@JsonIgnore
 	Task taskService;
 	
 	

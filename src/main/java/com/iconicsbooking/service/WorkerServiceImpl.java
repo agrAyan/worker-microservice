@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.iconicsbooking.exception.WorkerNotFoundException;
 import com.iconicsbooking.model.Availability;
 import com.iconicsbooking.model.Workers;
+import com.iconicsbooking.model.WorkersPartialUpdate;
 import com.iconicsbooking.repository.IWorkersRepository;
 @Service
 @Transactional
@@ -32,11 +33,13 @@ public class WorkerServiceImpl implements IWorkerService {
 	}
 
 	@Override
-	public String updateWorker(Workers worker) {
+	public Workers updateWorker(Workers worker) {
 		Workers workerUpdate= workerRepository.save(worker);
 		if(workerUpdate== null)
 			throw new WorkerNotFoundException("cannot updated");
-		return "updated successFully";
+		//return "updated successFully";
+		else 
+			return workerUpdate;
 	}
 
 	@Override
@@ -77,37 +80,5 @@ public class WorkerServiceImpl implements IWorkerService {
 		return allWorkerJobType;
 	}
 
-	@Override
-	public String assignTaskToResource(int taskId, int workerId) {
-		changeStatus(workerId);
-		int status=workerRepository.assignTask(taskId, workerId);
-		if(status>0)
-			return "Assigned Task";
-		else
-			throw new WorkerNotFoundException("Cannot assign task");
-	}
-
-	@Override
-	public String changeStatus(int workerId) {
-		int status= workerRepository.changeStatus(notAvialble, workerId);
-		if(status>0)
-			return "status Changed";
-		else
-			throw new WorkerNotFoundException("Cannot change Status");
-	
-	}
-
-	@Override
-	public String freeResource(int workerId) {
-	
-		int status= workerRepository.changeStatus(availibile, workerId);
-		if(status>0)
-			return "status Changed";
-		else
-			throw new WorkerNotFoundException("Cannot change Status");
-	
-		
-	
-	}
 
 }

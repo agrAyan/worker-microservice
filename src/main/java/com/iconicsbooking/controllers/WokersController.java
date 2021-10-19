@@ -32,9 +32,10 @@ public class WokersController {
 		return responseEntity;
 	}
 	@PutMapping("/worker")
-	ResponseEntity<String> updateWorker(@RequestBody Workers worker) {
-		String message= workerService.updateWorker(worker);
-		ResponseEntity<String> responseEntity= new ResponseEntity<>(message,HttpStatus.OK);
+	ResponseEntity<Workers> updateWorker(@RequestBody Workers worker) {
+		Workers message= workerService.updateWorker(worker);
+	//	ResponseEntity<String> responseEntity= new ResponseEntity<>(message,HttpStatus.OK);
+		ResponseEntity<Workers> responseEntity= new ResponseEntity<>(message,HttpStatus.OK);
 		return responseEntity;
 	}
 	@GetMapping("worker/workerId/{workerId}")
@@ -55,30 +56,19 @@ public class WokersController {
 		ResponseEntity<String> responseEntity= new ResponseEntity<>(message,HttpStatus.OK);
 		return responseEntity;
 	}
-	@GetMapping("worker/status/{status}")
+	@GetMapping("/worker/status/{status}")
 	ResponseEntity<List<Workers>> getByWorkerStatus(@PathVariable("status") String status){
 		Availability statusValue= Availability.valueOf(status);
 		List<Workers> workerByStatus= workerService.getByWorkerStatus(statusValue);
 		ResponseEntity<List<Workers>> responseEntity= new ResponseEntity<>(workerByStatus,HttpStatus.OK);
 		return responseEntity;
 	}
-	@GetMapping("worker/jobType/{jobType}")
+	@GetMapping("/worker/jobType/{jobType}")
 	ResponseEntity<List<Workers>> getByJobType(@PathVariable("jobType") String jobType){
 		List<Workers> workerByJobType= workerService.getByJobType(jobType);
 		ResponseEntity<List<Workers>> responseEntity= new ResponseEntity<>(workerByJobType,HttpStatus.OK);
 		return responseEntity;
 	}
-	@GetMapping("worker/taskId/{taskId}/workerId/{workerId}")
-	ResponseEntity<String> assignTask(@PathVariable("taskId") int taskId, @PathVariable("workerId") int workerId) {
-		String message=  workerService.assignTaskToResource(taskId, workerId);
-		ResponseEntity<String> responseEntity= new ResponseEntity<>(message,HttpStatus.OK);
-		return responseEntity;
-	}
-	@GetMapping("worker/changeStatus/{workerId}")
-	ResponseEntity<String> changeStatus(@PathVariable("workerId") int workerId) {
-		String message=  workerService.changeStatus(workerId);
-		ResponseEntity<String> responseEntity= new ResponseEntity<>(message,HttpStatus.OK);
-		return responseEntity;
-	}
+
 	
 }
